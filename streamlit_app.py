@@ -51,17 +51,21 @@ if run_button:
     # Simple heuristic naming based on cluster means
     names = {}
     for c in sorted(df['Cluster'].unique()):
-        sub = df[df['Cluster']==c]
-        income = sub['Annual Income (k$)'].mean()
-        spend = sub['Spending Score (1-100)'].mean()
-        if income > df['Annual Income (k$)'].mean() and spend > df['Spending Score (1-100)'].mean():
+        c = int(c)
+
+        sub = df[df['Cluster'] == c]
+
+        income = float(sub['Annual Income (k$)'].mean())
+        spend = float(sub['Spending Score (1-100)'].mean())
+
+        if income > float(df['Annual Income (k$)'].mean()) and spend > float(df['Spending Score (1-100)'].mean()):
             names[c] = 'Premium High-Spenders'
-        elif income <= df['Annual Income (k$)'].mean() and spend > df['Spending Score (1-100)'].mean():
+        elif income <= float(df['Annual Income (k$)'].mean()) and spend > float(df['Spending Score (1-100)'].mean()):
             names[c] = 'Low Income - High Spend'
-        elif income > df['Annual Income (k$)'].mean() and spend <= df['Spending Score (1-100)'].mean():
+        elif income > float(df['Annual Income (k$)'].mean()) and spend <= float(df['Spending Score (1-100)'].mean()):
             names[c] = 'High Income - Low Spend'
         else:
-            names[c] = 'Budget/Moderate Segment'
+            names[c] = 'Budget / Moderate Segment'
     st.write(names)
 
     st.info('To integrate a real AI (LLM) for dynamic insights, wire up an API call to OpenAI/Gemini and send the cluster summaries for natural-language explanations.')
