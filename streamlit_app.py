@@ -43,30 +43,6 @@ run_button = st.sidebar.button("Run Clustering")
 
 
 # -----------------------------
-# GEMINI CONFIG
-# -----------------------------
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-
-def generate_gemini_insights(cluster_summaries):
-    model = genai.GenerativeModel("models/gemini-pro")
-
-    prompt = f"""
-You are a senior business data analyst.
-
-Based on the following customer clusters,
-generate business insights and marketing strategies.
-
-Cluster data:
-{cluster_summaries}
-
-Use bullet points and simple language.
-"""
-
-    response = model.generate_content(prompt)
-    return response.text
-
-# -----------------------------
 # RUN CLUSTERING
 # -----------------------------
 if run_button:
@@ -121,17 +97,6 @@ if run_button:
 
     st.subheader("Cluster Statistics")
     st.json(cluster_summaries)
-
-
-    # -----------------------------
-    # GEMINI AI INSIGHTS
-    # -----------------------------
-    st.subheader("🤖 Gemini AI – Business Insights")
-
-    with st.spinner("Gemini AI is generating insights..."):
-        insights = generate_gemini_insights(cluster_summaries)
-
-    st.markdown(insights)
 
 
 # -----------------------------
