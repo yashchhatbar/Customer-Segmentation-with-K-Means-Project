@@ -68,20 +68,20 @@ if run_button:
     cluster_names = {}
     
     for c in sorted(df["Cluster"].unique()):
-        c_int = int(c)  # 🔥 FIX 1: numpy.int32 → int
+        c_int = int(c)
         sub = df[df["Cluster"] == c_int]
     
-        income = float(sub["Annual Income (k$)"].mean())      # 🔥 FIX 2
-        spend = float(sub["Spending Score (1-100)"].mean())   # 🔥 FIX 3
+        income = float(sub["Annual Income (k$)"].mean())
+        spend = float(sub["Spending Score (1-100)"].mean())
     
         if income > df["Annual Income (k$)"].mean() and spend > df["Spending Score (1-100)"].mean():
-            cluster_names[str(c_int)] = "Premium High-Spenders"
+            cluster_names[str(c_int)] = "High Income - High Spending"
         elif income <= df["Annual Income (k$)"].mean() and spend > df["Spending Score (1-100)"].mean():
-            cluster_names[str(c_int)] = "Low Income - High Spend"
+            cluster_names[str(c_int)] = "Low Income - Low Spending"
         elif income > df["Annual Income (k$)"].mean() and spend <= df["Spending Score (1-100)"].mean():
-            cluster_names[str(c_int)] = "High Income - Low Spend"
+            cluster_names[str(c_int)] = "Low Income - High Spending"
         else:
-            cluster_names[str(c_int)] = "Budget / Moderate Segment"
+            cluster_names[str(c_int)] = "High Income, Low Spending"
     
     st.json(cluster_names)
 
