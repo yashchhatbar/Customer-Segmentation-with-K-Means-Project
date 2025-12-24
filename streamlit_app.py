@@ -81,7 +81,7 @@ if run_button:
         elif income > df["Annual Income (k$)"].mean() and spend <= df["Spending Score (1-100)"].mean():
             cluster_names[str(c_int)] = "Low Income - High Spending"
         else:
-            cluster_names[str(c_int)] = "High Income, Low Spending"
+            cluster_names[str(c_int)] = "High Income - Low Spending"
     
     st.json(cluster_names)
 
