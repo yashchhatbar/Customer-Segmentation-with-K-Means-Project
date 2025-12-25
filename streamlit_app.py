@@ -1,6 +1,3 @@
-# Streamlit app for AI-Enhanced Customer Segmentation using K-Means + Gemini AI
-# Run locally: streamlit run streamlit_app.py
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -16,7 +13,7 @@ from sklearn.cluster import KMeans
 DATA_PATH = "Mall_Customers_cleaned.csv"
 
 st.set_page_config(page_title="AI Customer Segmentation", layout="centered")
-st.title("AI-Enhanced Customer Segmentation (K-Means + Gemini)")
+st.title("AI-Enhanced Customer Segmentation (K-Means)")
 
 
 # -----------------------------
